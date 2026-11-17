@@ -77,11 +77,13 @@ export default function Home(props: Props) {
               <p>Certified Manual Therapist (ISOMT)</p>
             </div>
           </div>
-          <img
-            src={HERO}
-            alt="Physiotherapy clinic interior"
-            className="mt-[calc(var(--k)*8)] block h-auto w-full shrink-0 rounded-[calc(var(--k)*12)] object-contain shadow-[0_4px_12px_rgba(16,90,120,0.16)]"
-          />
+          <div className="hero-image-frame relative mt-[calc(var(--k)*8)] w-full shrink-0 rounded-[calc(var(--k)*12)] shadow-[0_8px_22px_rgba(16,90,120,0.24)]">
+            <img
+              src={HERO}
+              alt="Physiotherapy clinic interior"
+              className="block h-auto w-full rounded-[calc(var(--k)*12)] object-contain"
+            />
+          </div>
         </section>
 
         {/* Everything below the hero, at its natural size */}

@@ -32,3 +32,15 @@ body,
 .clinic-page {
   --k: min(calc(100vw / 810), calc(100dvh / 1950));
 }
+
+.hero-image-frame::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 88%, #000 100%);
+  mask-image: radial-gradient(ellipse at center, transparent 88%, #000 100%);
+  content: '';
+  pointer-events: none;
+}
