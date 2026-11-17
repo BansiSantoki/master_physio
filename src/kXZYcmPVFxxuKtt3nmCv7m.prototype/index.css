@@ -1,0 +1,34 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORT — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORT MUST NEVER BE DELETED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss';
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+@theme {
+  --color-navy: #102b59;
+  --color-teal: #10a7a9;
+  --color-cyan: #32c6d0;
+  --color-ice: #ddf7fa;
+  --color-ink: #172b50;
+  --font-sans: 'Hind', ui-sans-serif, system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.clinic-page {
+  --k: min(calc(100vw / 810), calc(100dvh / 1950));
+}
