@@ -24,12 +24,11 @@ html,
 body,
 #root {
   width: 100%;
-  min-height: 100%;
+  height: 100dvh;
   margin: 0;
   padding: 0;
   background-color: #0d1b30;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .clinic-page {
