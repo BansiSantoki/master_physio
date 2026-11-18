@@ -1,10 +1,28 @@
 import React from 'react'
-import { Phone, Globe, MapPin, CalendarDays, Zap, Brain, Bone, ContactRound } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Phone, Globe, MapPin, ContactRound } from 'lucide-react'
 
 import { ContactButton } from './components/ContactButton'
 import { ServiceCard } from './components/ServiceCard'
-import { WhatsAppIcon, SpineIcon } from './components/ClinicIcons'
-import { Waves } from './components/Waves'
+import {
+  WhatsAppIcon,
+  CallIcon,
+  WebsiteIcon,
+  LocationIcon,
+  CalendarCheckIcon,
+  LightningIcon,
+  KneeJointIcon,
+  BrainIcon,
+  SpineCareIcon,
+} from './components/ClinicIcons'
+
+import bgImage from '../assets/background.jpg'
+import logoImg from '../assets/logo.png'
+import thumbBookAppointment from '../assets/thumb_book_appointment.png'
+import thumbPainManagement from '../assets/thumb_pain_management.png'
+import thumbOrthoRehab from '../assets/thumb_ortho_rehab.png'
+import thumbNeuroRehab from '../assets/thumb_neuro_rehab.png'
+import thumbSpineCare from '../assets/thumb_spine_care.png'
 
 export const args = {
   phone: '+91 9664081742',
@@ -22,161 +40,254 @@ export const argTypes = {
 
 type Props = Partial<typeof args>
 
-const REF = 'https://cdn.magicpatterns.com/uploads/eTKW9QwSt6P12s9durm11E/image.png'
-const HERO = 'https://cdn.magicpatterns.com/patterns/generated-images/f0e39c6a-cd46-4262-ba20-74e932fd333a.jpg'
-
 export default function Home(props: Props) {
   const { phone, website, address, slogan } = { ...args, ...props }
   const tel = 'tel:' + phone.replace(/\s/g, '')
   const wa = 'https://wa.me/' + phone.replace(/\D/g, '')
-  const site = 'https://' + website
+  const site = 'https://' + website.replace(/^https?:\/\//, '')
   const map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address)
   const enquire = (topic: string) =>
     wa + '?text=' + encodeURIComponent(`Hello Dr. Deepak, I would like to ${topic}.`)
+
   const contactCard = [
     'BEGIN:VCARD',
     'VERSION:3.0',
     'FN:Dr. Deepak H. Master PT.',
-    'N:Master;Deepak H.;;;',
-    `TEL;TYPE=WORK,VOICE:${phone}`,
+    'N:Master;Deepak;H.;Dr.;PT.',
+    'ORG:Master\'s Physiotherapy & Matrix Centre',
+    'TITLE:Senior Consulting Physiotherapist',
+    `TEL;TYPE=CELL,VOICE:${phone}`,
     `URL:${site}`,
-    `ADR;TYPE=WORK:;;${address};`,
+    `ADR;TYPE=WORK:;;201, Mauli Desire 2, Daftary Road;Malad (East), Mumbai;;400097;India`,
+    'NOTE:Specialist in Pain Management & Restricted Movement. Certified Matrix Rhythm Therapy Practitioner.',
     'END:VCARD',
   ].join('\r\n')
   const contactCardUrl = `data:text/vcard;charset=utf-8,${encodeURIComponent(contactCard)}`
 
   return (
-    <main className="clinic-page relative h-[100dvh] w-full overflow-hidden bg-white font-sans text-ink">
-      <Waves />
-
-      <div className="relative z-10 flex min-h-full flex-col">
-        {/* Hero: logo, doctor, qualifications over the clinic photo */}
-        <section className="relative flex min-h-0 flex-1 flex-col items-center">
-          <div className="relative z-10 flex flex-col items-center pt-[calc(var(--k)*28)] text-center">
-            <div
-              role="img"
-              aria-label="Master's Physiotherapy & Matrix Centre logo"
-              className="h-[calc(var(--k)*118)] w-[calc(var(--k)*128)] mix-blend-multiply"
-              style={{
-                backgroundImage: `url(${REF})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: '703.125% auto',
-                backgroundPosition: '49.48% 5.8%',
-              }}
-            />
-            <h1 className="mt-[calc(var(--k)*6)] text-[length:calc(var(--k)*46)] font-bold leading-none tracking-[-0.01em] whitespace-nowrap text-navy">
-              Dr. Deepak H. Master PT.
-            </h1>
-            <p className="mt-[calc(var(--k)*12)] rounded-full bg-[linear-gradient(90deg,#0f9a9d,#14b3b5_50%,#0f9a9d)] px-[calc(var(--k)*26)] pb-[calc(var(--k)*3)] pt-[calc(var(--k)*6)] text-[length:calc(var(--k)*25)] font-medium leading-tight whitespace-nowrap text-white shadow-[0_2px_6px_rgba(16,167,169,0.3)]">
-              Senior Consulting Physiotherapist
-            </p>
-            <div className="mt-[calc(var(--k)*12)] text-[length:calc(var(--k)*21.5)] font-semibold leading-[1.18] whitespace-nowrap text-ink">
-              <p>Specialist in Pain Management &amp; Restricted Movement</p>
-              <p>Certified Matrix Rhythm Therapy Practitioner</p>
-              <p>By Dr. Randoll Institute, Munich, Germany</p>
-              <p>Certified Manual Therapist (ISOMT)</p>
-            </div>
-          </div>
-          <div className="hero-image-frame relative mt-[calc(var(--k)*8)] w-full shrink-0 rounded-[calc(var(--k)*12)] shadow-[0_8px_22px_rgba(16,90,120,0.24)]">
+    <div className="flex min-h-screen w-full items-center justify-center bg-[#0d1b30] p-0 sm:py-6">
+      <motion.main
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="clinic-page relative flex h-[calc(var(--k)*1600)] w-[calc(var(--k)*900)] flex-col justify-between overflow-hidden bg-cover bg-top bg-no-repeat font-sans text-ink shadow-[0_12px_45px_rgba(0,0,0,0.45)] sm:rounded-[calc(var(--k)*36)]"
+        style={{ backgroundImage: `url(${bgImage})` }}
+      >
+        {/* Top Header Section */}
+        <section className="relative z-10 flex flex-col items-center pt-[calc(var(--k)*48)] text-center px-[calc(var(--k)*36)]">
+          {/* Logo Mark with spring entrance and subtle hover rotate */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.75, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 280, damping: 20 }}
+            whileHover={{ scale: 1.06, rotate: [0, -3, 3, 0] }}
+            className="flex items-center justify-center cursor-pointer"
+          >
             <img
-              src={HERO}
-              alt="Physiotherapy clinic interior"
-              className="block h-auto w-full rounded-[calc(var(--k)*12)] object-contain"
+              src={logoImg}
+              alt="Master's Physiotherapy Logo"
+              className="h-[calc(var(--k)*122)] w-auto object-contain select-none filter drop-shadow-sm"
             />
-          </div>
+          </motion.div>
+
+          {/* Doctor Name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="mt-[calc(var(--k)*8)] text-[length:calc(var(--k)*48)] font-bold leading-tight tracking-[-0.015em] whitespace-nowrap text-navy"
+          >
+            Dr. Deepak H. Master PT.
+          </motion.h1>
+
+          {/* Specialty Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 22, delay: 0.18 }}
+            whileHover={{ scale: 1.05 }}
+            className="mt-[calc(var(--k)*10)] flex items-center justify-center cursor-default"
+          >
+            <span className="rounded-full bg-[linear-gradient(90deg,#0ea5a8_0%,#14b8b2_50%,#0ea5a8_100%)] px-[calc(var(--k)*28)] py-[calc(var(--k)*6)] text-[length:calc(var(--k)*24)] font-semibold leading-tight whitespace-nowrap text-white shadow-[0_2px_8px_rgba(14,165,168,0.35)]">
+              Senior Consulting Physiotherapist
+            </span>
+          </motion.div>
+
+          {/* Qualifications & Certifications */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.25 }}
+            className="mt-[calc(var(--k)*12)] flex flex-col items-center text-[length:calc(var(--k)*22.5)] font-semibold leading-[1.3] text-ink"
+          >
+            <p>Specialist in Pain Management &amp; Restricted Movement</p>
+            <p>Certified Matrix Rhythm Therapy Practitioner</p>
+            <p>By Dr. Randoll Institute, Munich, Germany</p>
+            <p>Certified Manual Therapist (ISOMT)</p>
+          </motion.div>
         </section>
 
-        {/* Everything below the hero, at its natural size */}
-        <div className="relative mx-auto flex w-[min(100%,calc(var(--k)*1120))] shrink-0 flex-col px-[calc(var(--k)*30)] pb-[calc(var(--k)*58)]">
-        <nav aria-label="Contact" className="grid grid-cols-4 gap-[calc(var(--k)*20)] px-[calc(var(--k)*8)]">
-          <ContactButton href={wa} label="WhatsApp" icon={<WhatsAppIcon className="h-full w-full text-[#25B03D]" />} />
-          <ContactButton href={tel} label="Call" icon={<Phone className="h-full w-full fill-[#1A6FD8] text-[#1A6FD8]" strokeWidth={1.5} />} />
-          <ContactButton href={site} label="Website" icon={<Globe className="h-full w-full text-[#1A6FD8]" strokeWidth={2.2} />} />
-          <ContactButton href={map} label="Location" icon={<MapPin className="h-full w-full fill-teal text-teal [&>circle]:fill-white [&>circle]:stroke-white" strokeWidth={1.8} />} />
-        </nav>
+        {/* Clear Spacer so clinic room (bed, neon runner, spine, ball) shines through in the background */}
+        <div className="h-[calc(var(--k)*130)] shrink-0 pointer-events-none" aria-hidden />
 
-        <ul className="mt-[calc(var(--k)*28)] flex flex-col gap-[calc(var(--k)*10)]">
-          <ServiceCard
-            href={enquire('book an appointment')}
-            title="Book Appointment"
-            image="https://cdn.magicpatterns.com/patterns/generated-images/db01ace4-7076-4f5e-83ab-12fba68e9d55.jpg"
-            imagePosition="40% 60%"
-            icon={<CalendarDays className="h-full w-full" strokeWidth={1.8} />}
-          />
-          <ServiceCard
-            href={enquire('enquire about Pain Management')}
-            title="Pain Management"
-            image="https://cdn.magicpatterns.com/patterns/generated-images/4ae895e1-6611-4419-8497-3956572da63d.jpg"
-            imagePosition="52% 45%"
-            icon={<Zap className="h-full w-full fill-teal" strokeWidth={1.4} />}
-          />
-          <ServiceCard
-            href={enquire('enquire about Ortho Rehab')}
-            title="Ortho Rehab"
-            image="https://cdn.magicpatterns.com/patterns/generated-images/b6951a63-5c78-44d3-898c-d573d3859916.jpg"
-            imagePosition="45% 55%"
-            icon={<Bone className="h-full w-full" strokeWidth={1.6} />}
-          />
-          <ServiceCard
-            href={enquire('enquire about Neuro Rehab')}
-            title="Neuro Rehab"
-            image="https://cdn.magicpatterns.com/patterns/generated-images/8001b07b-50ce-43da-8d54-94167baaa17b.jpg"
-            imagePosition="45% 55%"
-            icon={<Brain className="h-full w-full" strokeWidth={1.6} />}
-          />
-          <ServiceCard
-            href={enquire('enquire about Spine Care')}
-            title="Spine Care"
-            image="https://cdn.magicpatterns.com/patterns/generated-images/75eaf8f6-7509-4867-a7c6-6f64cb41da34.jpg"
-            imagePosition="50% 45%"
-            icon={<SpineIcon className="h-full w-full" />}
-          />
-        </ul>
+        {/* Interactive Content: Quick Actions, Services, Save Contact, Slogan, Footer */}
+        <div className="relative z-10 flex flex-col px-[calc(var(--k)*44)] pb-[calc(var(--k)*38)]">
+          {/* 4 Quick Action Contact Buttons */}
+          <nav aria-label="Quick Actions" className="grid grid-cols-4 gap-[calc(var(--k)*16)]">
+            <ContactButton href={wa} label="WhatsApp" icon={<WhatsAppIcon />} index={0} />
+            <ContactButton href={tel} label="Call" icon={<CallIcon />} index={1} />
+            <ContactButton href={site} label="Website" icon={<WebsiteIcon />} index={2} />
+            <ContactButton href={map} label="Location" icon={<LocationIcon />} index={3} />
+          </nav>
 
-        <a
-          href={contactCardUrl}
-          download="Dr-Deepak-H-Master.vcf"
-          className="mt-[calc(var(--k)*18)] flex h-[calc(var(--k)*68)] items-center justify-center gap-[calc(var(--k)*12)] rounded-[calc(var(--k)*18)] bg-[linear-gradient(100deg,#0b8e98,#1fb6c1_50%,#0b7f8f)] text-[length:calc(var(--k)*27)] font-semibold text-white shadow-[0_4px_12px_rgba(16,90,120,0.2)] transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
-        >
-          <ContactRound className="size-[calc(var(--k)*32)]" strokeWidth={2} />
-          <span>Save Contact</span>
-        </a>
+          {/* 5 Service Cards */}
+          <ul className="mt-[calc(var(--k)*22)] flex flex-col gap-[calc(var(--k)*11)]">
+            <ServiceCard
+              href={enquire('book an appointment')}
+              title="Book Appointment"
+              image={thumbBookAppointment}
+              icon={<CalendarCheckIcon className="size-full" />}
+              index={0}
+            />
+            <ServiceCard
+              href={enquire('enquire about Pain Management')}
+              title="Pain Management"
+              image={thumbPainManagement}
+              icon={<LightningIcon className="size-full" />}
+              index={1}
+            />
+            <ServiceCard
+              href={enquire('enquire about Ortho Rehab')}
+              title="Ortho Rehab"
+              image={thumbOrthoRehab}
+              icon={<KneeJointIcon className="size-full" />}
+              index={2}
+            />
+            <ServiceCard
+              href={enquire('enquire about Neuro Rehab')}
+              title="Neuro Rehab"
+              image={thumbNeuroRehab}
+              icon={<BrainIcon className="size-full" />}
+              index={3}
+            />
+            <ServiceCard
+              href={enquire('enquire about Spine Care')}
+              title="Spine Care"
+              image={thumbSpineCare}
+              icon={<SpineCareIcon className="size-full" />}
+              index={4}
+            />
+          </ul>
 
-        {/* Slogan */}
-        <div className="relative mt-[calc(var(--k)*30)] overflow-hidden rounded-full bg-[linear-gradient(100deg,#0b8e98_0%,#1fb6c1_30%,#45d0d8_58%,#1aa9b6_80%,#0b7f8f_100%)] py-[calc(var(--k)*12)] text-center shadow-[0_6px_14px_rgba(16,120,140,0.28)]">
-          <svg viewBox="0 0 400 40" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
-            <path d="M0 40 C120 22 260 36 400 6 L400 40 Z" fill="white" opacity="0.14" />
-            <path d="M210 40 C290 34 350 22 400 4" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" fill="none" />
-          </svg>
-          <p className="relative text-[length:calc(var(--k)*34)] font-medium italic leading-tight whitespace-nowrap text-white">
-            {slogan}
-          </p>
-        </div>
+          {/* Save Contact Button */}
+          <motion.a
+            href={contactCardUrl}
+            download="Dr-Deepak-H-Master.vcf"
+            initial={{ opacity: 0, y: 15, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.45, delay: 0.8 }}
+            whileHover={{
+              scale: 1.025,
+              y: -3,
+              boxShadow: '0 8px 24px rgba(15,154,157,0.4)',
+            }}
+            whileTap={{ scale: 0.96 }}
+            className="group relative mt-[calc(var(--k)*18)] flex h-[calc(var(--k)*66)] items-center justify-center gap-[calc(var(--k)*12)] overflow-hidden rounded-[calc(var(--k)*18)] bg-[linear-gradient(100deg,#0a939e_0%,#18b8c8_50%,#088295_100%)] text-[length:calc(var(--k)*27)] font-bold text-white shadow-[0_4px_16px_rgba(14,140,155,0.32)] backdrop-blur-sm transition-all duration-200"
+          >
+            {/* Animated shimmer light effect */}
+            <motion.div
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.28)_50%,transparent_100%)]"
+              animate={{ translateX: ['-100%', '200%'] }}
+              transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut', repeatDelay: 1 }}
+            />
+            <ContactRound className="size-[calc(var(--k)*32)] transition-transform duration-200 group-hover:scale-110" strokeWidth={2.2} />
+            <span className="tracking-wide">Save Contact</span>
+          </motion.a>
 
-        {/* Footer */}
-        <footer className="mt-[calc(var(--k)*28)] flex flex-col items-center gap-[calc(var(--k)*10)] text-[length:calc(var(--k)*23)] font-medium leading-none whitespace-nowrap text-navy">
-          <div className="flex items-center gap-[calc(var(--k)*30)]">
-            <a href={tel} className="flex items-center gap-[calc(var(--k)*14)] hover:text-teal">
-              <span className="flex size-[calc(var(--k)*32)] items-center justify-center rounded-full bg-teal">
-                <Phone className="size-[60%] fill-white text-white" strokeWidth={1} />
+          {/* Slogan Pill Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 15, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            whileHover={{ scale: 1.02 }}
+            className="relative mt-[calc(var(--k)*18)] overflow-hidden rounded-full bg-[linear-gradient(90deg,#1fc2d0_0%,#0ea5b6_40%,#088295_100%)] py-[calc(var(--k)*13)] px-[calc(var(--k)*18)] text-center shadow-[0_4px_16px_rgba(14,140,155,0.32)]"
+          >
+            <svg
+              viewBox="0 0 500 50"
+              preserveAspectRatio="none"
+              className="pointer-events-none absolute inset-0 h-full w-full"
+              aria-hidden
+            >
+              <path d="M0 50 C150 25 320 42 500 8 L500 50 Z" fill="white" opacity="0.18" />
+              <path d="M250 50 C360 42 430 26 500 6" stroke="white" strokeOpacity="0.6" strokeWidth="1.5" fill="none" />
+            </svg>
+            {/* Soft wave shimmer */}
+            <motion.div
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.22)_50%,transparent_100%)]"
+              animate={{ translateX: ['-100%', '200%'] }}
+              transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', repeatDelay: 1.5 }}
+            />
+            <p className="relative text-[length:calc(var(--k)*33)] font-medium italic leading-tight text-white tracking-wide">
+              {slogan}
+            </p>
+          </motion.div>
+
+          {/* Footer Contact Info */}
+          <motion.footer
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 1 }}
+            className="mt-[calc(var(--k)*18)] flex flex-col items-center gap-[calc(var(--k)*8)] text-navy"
+          >
+            {/* Phone & Website Row */}
+            <div className="flex items-center justify-center gap-[calc(var(--k)*24)] text-[length:calc(var(--k)*22)] font-bold">
+              <motion.a
+                href={tel}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                className="flex items-center gap-[calc(var(--k)*10)] transition-colors hover:text-teal"
+              >
+                <span className="flex size-[calc(var(--k)*28)] items-center justify-center rounded-full bg-teal text-white shadow-sm">
+                  <Phone className="size-[55%] fill-white text-white" strokeWidth={1} />
+                </span>
+                <span>{phone}</span>
+              </motion.a>
+              <span className="h-[calc(var(--k)*24)] w-[calc(var(--k)*2)] rounded-full bg-teal/60" aria-hidden />
+              <motion.a
+                href={site}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                className="flex items-center gap-[calc(var(--k)*10)] transition-colors hover:text-teal"
+              >
+                <span className="flex size-[calc(var(--k)*28)] items-center justify-center rounded-full bg-teal text-white shadow-sm">
+                  <Globe className="size-[60%] text-white" strokeWidth={2.2} />
+                </span>
+                <span>{website}</span>
+              </motion.a>
+            </div>
+
+            {/* Address Row */}
+            <motion.a
+              href={map}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center justify-center gap-[calc(var(--k)*8)] text-[length:calc(var(--k)*20)] font-semibold text-center leading-tight transition-colors hover:text-teal"
+            >
+              <span className="flex size-[calc(var(--k)*26)] shrink-0 items-center justify-center text-teal">
+                <MapPin
+                  className="size-[90%] fill-teal text-teal [&>circle]:fill-white [&>circle]:stroke-white"
+                  strokeWidth={1.8}
+                />
               </span>
-              <span className="pt-[0.15em]">{phone}</span>
-            </a>
-            <span className="h-[calc(var(--k)*30)] w-px bg-teal" aria-hidden />
-            <a href={site} target="_blank" rel="noreferrer" className="flex items-center gap-[calc(var(--k)*14)] hover:text-teal">
-              <span className="flex size-[calc(var(--k)*32)] items-center justify-center rounded-full bg-teal">
-                <Globe className="size-[66%] text-white" strokeWidth={2} />
-              </span>
-              <span className="pt-[0.15em]">{website}</span>
-            </a>
-          </div>
-          <a href={map} target="_blank" rel="noreferrer" className="flex items-center gap-[calc(var(--k)*10)] text-[length:calc(var(--k)*21)] hover:text-teal">
-            <MapPin className="size-[calc(var(--k)*30)] shrink-0 fill-teal text-teal [&>circle]:fill-white [&>circle]:stroke-white" strokeWidth={1.6} />
-            <span className="pt-[0.15em]">{address}</span>
-          </a>
-        </footer>
+              <span>{address}</span>
+            </motion.a>
+          </motion.footer>
         </div>
-      </div>
-    </main>
+      </motion.main>
+    </div>
   )
 }

@@ -6,11 +6,11 @@
 /* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
 
 @theme {
-  --color-navy: #102b59;
-  --color-teal: #10a7a9;
-  --color-cyan: #32c6d0;
-  --color-ice: #ddf7fa;
-  --color-ink: #172b50;
+  --color-navy: #0e2753;
+  --color-teal: #0f9a9d;
+  --color-cyan: #1fc2d0;
+  --color-ice: #e4f9fc;
+  --color-ink: #152e5a;
   --font-sans: 'Hind', ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -24,23 +24,20 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
-  overflow: hidden;
+  padding: 0;
+  background-color: #0d1b30;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .clinic-page {
-  --k: min(calc(100vw / 810), calc(100dvh / 1950));
+  --k: min(calc(100vw / 900), calc(100dvh / 1600));
 }
 
-.hero-image-frame::after {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  -webkit-mask-image: radial-gradient(ellipse at center, transparent 88%, #000 100%);
-  mask-image: radial-gradient(ellipse at center, transparent 88%, #000 100%);
-  content: '';
-  pointer-events: none;
+@media (min-width: 900px) and (min-height: 1600px) {
+  .clinic-page {
+    --k: 1;
+  }
 }
