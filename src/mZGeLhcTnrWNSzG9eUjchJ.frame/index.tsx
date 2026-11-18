@@ -65,7 +65,7 @@ export default function Home(props: Props) {
   const contactCardUrl = `data:text/vcard;charset=utf-8,${encodeURIComponent(contactCard)}`
 
   return (
-    <div className="fixed inset-0 flex h-dvh w-full items-center justify-center overflow-hidden bg-[#0d1b30] p-0">
+    <div className="clinic-viewport flex items-center justify-center bg-[#0d1b30] p-0">
       <motion.main
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
